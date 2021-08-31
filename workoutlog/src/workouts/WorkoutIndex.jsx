@@ -8,7 +8,7 @@ const WorkoutIndex = (props) => {
    const [workouts, setWorkouts] = useState([]);    
 
     const fetchWorkouts = () => {
-        fetch('http://localhost:3001/log', {
+        fetch('http://localhost:3001/log/', {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type': 'application/json',
@@ -17,6 +17,7 @@ const WorkoutIndex = (props) => {
         })
         .then((res) => res.json())
         .then((logData) => {
+            console.log(logData)
             setWorkouts(logData)
         })
     }
@@ -24,6 +25,8 @@ const WorkoutIndex = (props) => {
     useEffect(() => {
         fetchWorkouts();
     }, [])
+
+
 
     return (
         <Container>
