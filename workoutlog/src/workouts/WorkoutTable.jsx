@@ -3,7 +3,8 @@ import { Table, Button, } from 'reactstrap';
 const WorkoutTable = (props) => {
 
     const deleteWorkout = (workout) => {
-        fetch(`http://localhost:3000/log/${workout.id}`, {
+        console.log(workout);
+        fetch(`http://localhost:3001/log/${workout.id}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -25,7 +26,7 @@ const WorkoutTable = (props) => {
                         <td>{workout.description}</td>
                         <td>{workout.definition}</td>
                         <td>
-                            <Button color="warning">Update</Button>
+                            <Button color="warning" onClick={() => {props.editUpdateWorkout(workout); props.updateOn()}}>Update</Button>
                             <Button color="danger" onClick={() => {deleteWorkout(workout)}}>Delete</Button>
                         </td>
                     </tr>

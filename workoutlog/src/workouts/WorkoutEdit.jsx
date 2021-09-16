@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reeactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 
-const WorkoutEdit = (props) = () => {
-
+const WorkoutEdit = (props) => {
     const [editDesc, setEditDesc] = useState(props.workoutToUpdate.description);
     const [editDef, setEditDef] = useState(props.workoutToUpdate.definition);
     const [editRes, setEditRes] = useState(props.workoutToUpdate.result);
-    const workoutUpdate = (e, workout) => {
-        e.preventDedault();
-        fetch(`http://localhost:3000/log/${props.workoutToUpdate.id}`, {
+    const workoutUpdate = (event, workout) => {
+        event.preventDefault();
+        console.log(props.workoutToUpdate);
+        fetch(`http://localhost:3001/log/${props.workoutToUpdate.id}`, {
             method: 'PUT',
             body: JSON.stringify({log: {description: editDesc, definition: editDef, result: editRes}}),
-            heders: new Headers ({
+            headers: new Headers ({
                 'Content-Type': 'application/json',
                 'Authorization': props.token
             })
@@ -41,9 +41,10 @@ const WorkoutEdit = (props) = () => {
                             <option></option>
                             <option value="Time"Time>Time</option>
                             <option value="Weight">Weight</option>
-                            <option value="Distance"Distance></option>
+                            <option value="Distance">Distance</option>
                         </Input>
                     </FormGroup>
+                    <Button type="submit">Update the Workout!</Button>
                 </Form>
             </ModalBody>
         </Modal>
